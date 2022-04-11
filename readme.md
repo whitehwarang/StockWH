@@ -1,4 +1,4 @@
-Stock Data Warehouse with Python + PostgreSQL.
+Stock Data Warehouse Management with Python + PostgreSQL.
 
 # initialize.
 1. Table Creation
