@@ -7,7 +7,14 @@ Stock Data Warehouse Management with Python + PostgreSQL.
     import DB; DB.update();
 
 # how to use.
-4. daychart: pd.DataFrame = StockWH.Stock.S11_DAYCHART.read()
+
+## DB update
+>>> import StockWH
+>>> StockWH.update()
+
+## load data from DB
+>>> import StockWH
+>>> daychart: pd.DataFrame = StockWH.Stock.S11_DAYCHART.read()
 
 Caution!
 Some python packages like "DTC" may not be contained within this python package.
