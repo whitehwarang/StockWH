@@ -7,7 +7,6 @@ from typing import Union, Iterable
 import os
 from collections import OrderedDict
 
-
 PG_CONNECTOR = pg.connect(dbname='', user='', password='')
 PG_CURSOR = PG_CONNECTOR.cursor()
 
@@ -67,7 +66,7 @@ class BaseDB:
                     ON CONFLICT ON CONSTRAINT {TABLE_NAME}_pkey 
                     DO UPDATE 
                     SET {', '.join((' = EXCLUDED.'.join((fn_npk, fn_npk)) for fn_npk in field_names_not_pk))} 
-                    WHERE {', '.join((' = EXCLUDED.'.join(('T.' + nk_pk, nk_pk)) for nk_pk in field_names_pk))} 
+                    WHERE {' AND '.join((' = EXCLUDED.'.join(('T.' + nk_pk, nk_pk)) for nk_pk in field_names_pk))} 
             ;"""
 
     @classmethod
@@ -326,7 +325,7 @@ class OptionItemReadable:
         idx = a[a].index[0]
         strk_year, strk_month, strk_day = [int(each) for each in DTC.EXPIREDAYS[idx].split('-')]
 
-        from StockWH import FutOpt as fo
+        from DB import FutOpt as fo
         if criterion == 'open':
             kospi_fut = fo.F12_MINCHART.read(columns=f"open",
                                              where=f"cd='10100' AND dt = '{str(date)}' AND tm <= '10:01:00'")
